@@ -191,8 +191,8 @@ class MainActivity : AppCompatActivity() {
             // 생일이 있을 때 TextView를 보이게 설정함
             binding.birthdayTextView.visibility = android.view.View.VISIBLE
         } else {
-            // 생일이 없는 경우에는 "오늘은 생일인 사람이 없습니다" 메시지를 표시함
-            binding.birthdayTextView.text = "오늘은 생일인 우마무스메가 없습니다."
+            // 생일이 없는 경우에는 "이 날은 생일인 사람이 없습니다" 메시지를 표시함
+            binding.birthdayTextView.text = "이 날은 생일인 우마무스메가 없습니다."
             binding.birthdayTextView.visibility = android.view.View.VISIBLE
 
             // 생일이 없는 날짜를 클릭하면 RecyclerView를 비움
