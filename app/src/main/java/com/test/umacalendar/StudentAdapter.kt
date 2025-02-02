@@ -13,8 +13,6 @@ class StudentAdapter(private var studentList: List<Student>) :
 
     class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.studentNameTextView)
-        // 생일 텍스트뷰를 사용하지 않음
-        // val birthdayTextView: TextView = itemView.findViewById(R.id.studentBirthdayTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
@@ -26,8 +24,6 @@ class StudentAdapter(private var studentList: List<Student>) :
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         val student = studentList[position]
         holder.nameTextView.text = student.name
-        // 생일 정보는 표시하지 않음
-        // holder.birthdayTextView.text = student.birthday
     }
 
     override fun getItemCount(): Int = studentList.size
