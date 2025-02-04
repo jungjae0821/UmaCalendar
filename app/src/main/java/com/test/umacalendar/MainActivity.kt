@@ -1,5 +1,8 @@
 package com.test.umacalendar
 
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.CalendarView
@@ -149,28 +152,37 @@ class MainActivity : AppCompatActivity() {
         // ViewBinding 설정
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val calendarView: CalendarView = findViewById(R.id.calendarView)
 
+        // Hyperlink 이벤트 처리
+        binding.hyperlinkTextView.apply {
+            text = "우마무스메 명부 보러가기"
+            paint.isUnderlineText = true // 밑줄 추가
+            setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://namu.wiki/w/%ED%8B%80:%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94%20%ED%94%84%EB%A6%AC%ED%8B%B0%20%EB%8D%94%EB%B9%84%EC%9D%98%20%EB%93%B1%EC%9E%A5%20%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94"))
+                startActivity(intent)
+            }
+        }
+
+        val calendarView: CalendarView = findViewById(R.id.calendarView)
         calendarView.setOnDateChangeListener { _, year, month, _ ->
-            // 월은 0부터 시작하므로 +1 필요
             val formattedDate = "${year}년 ${month + 1}월"
             val selectedDateTextView: TextView = findViewById(R.id.selectedDateText)
             selectedDateTextView.text = formattedDate
         }
+
         // RecyclerView 초기화
         adapter = StudentAdapter(emptyList()) // 초기에는 빈 리스트를 표시함
         binding.studentRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.studentRecyclerView.adapter = adapter
 
-        // 달력에서 날짜를 선택했을 때 이벤트 처리
+        // 달력 이벤트 처리
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "${year}년 ${String.format("%02d", month + 1)}월 ${String.format("%02d", dayOfMonth)}일"
             filterStudentsByDate("${String.format("%02d", month + 1)}-${String.format("%02d", dayOfMonth)}")
-
-            // 선택된 날짜 텍스트 설정
             binding.selectedDateText.text = "선택된 날짜: $selectedDate"
         }
     }
+
 
     // 선택된 날짜에 맞는 학생을 필터링함
     private fun filterStudentsByDate(date: String) {
