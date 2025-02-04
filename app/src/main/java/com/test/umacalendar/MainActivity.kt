@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "${year}년 ${String.format("%02d", month + 1)}월 ${String.format("%02d", dayOfMonth)}일"
             filterStudentsByDate("${String.format("%02d", month + 1)}-${String.format("%02d", dayOfMonth)}")
-            binding.selectedDateText.text = "선택된 날짜: $selectedDate"
+            binding.selectedDateText.text = "선택한 날짜: $selectedDate"
         }
     }
 
