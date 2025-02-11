@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Hyperlink 이벤트 처리
+        // 하이퍼링크 이벤트 처리
         binding.hyperlinkTextView.apply {
             text = "우마무스메 명부 보러가기"
             paint.isUnderlineText = true // 밑줄 추가
@@ -203,7 +203,7 @@ class MainActivity : AppCompatActivity() {
             // 생일이 있을 때 TextView를 보이게 설정함
             binding.birthdayTextView.visibility = android.view.View.VISIBLE
         } else {
-            // 생일이 없는 경우에는 "이 날은 생일인 사람이 없습니다" 메시지를 표시함
+            // 생일이 없는 경우에는 "이 날은 생일인 우마무스메가 없습니다" 메시지를 표시함
             binding.birthdayTextView.text = "이 날은 생일인 우마무스메가 없습니다."
             binding.birthdayTextView.visibility = android.view.View.VISIBLE
 
