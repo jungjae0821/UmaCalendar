@@ -4,8 +4,12 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.CalendarView
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -175,6 +179,15 @@ class MainActivity : AppCompatActivity() {
         binding.studentRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.studentRecyclerView.adapter = adapter
 
+        val searchEditText: EditText = findViewById(R.id.searchEditText)
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val query = s.toString()
+                searchStudentByName(query)
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
         // 달력 이벤트 처리
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "${year}년 ${String.format("%02d", month + 1)}월 ${String.format("%02d", dayOfMonth)}일"
@@ -183,6 +196,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun searchStudentByName(query: String) {
+        if (query.isEmpty()) {
+            adapter.updateData(emptyList())
+            binding.birthdayTextView.text = ""
+            return
+        }
+
+        val filteredList = studentList.filter { student ->
+            student.name.contains(query, ignoreCase = true)
+        }
+
+        if (filteredList.isNotEmpty()) {
+            adapter.updateData(filteredList)
+
+            val birthdayInfo = filteredList.joinToString("\n") { "${it.name}: ${it.birthday}" }
+            binding.birthdayTextView.text = "검색된 우마무스메 생일:\n$birthdayInfo"
+            binding.birthdayTextView.visibility = View.VISIBLE
+        } else {
+            binding.birthdayTextView.text = "검색된 우마무스메가 없습니다."
+            binding.birthdayTextView.visibility = View.VISIBLE
+            adapter.updateData(emptyList())
+        }
+    }
 
     // 선택된 날짜에 맞는 학생을 필터링함
     private fun filterStudentsByDate(date: String) {
