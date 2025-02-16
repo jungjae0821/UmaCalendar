@@ -179,6 +179,7 @@ class MainActivity : AppCompatActivity() {
         binding.studentRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.studentRecyclerView.adapter = adapter
 
+        // 우마무스메 명부 검색창
         val searchEditText: EditText = findViewById(R.id.searchEditText)
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -188,6 +189,7 @@ class MainActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
         // 달력 이벤트 처리
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = "${year}년 ${String.format("%02d", month + 1)}월 ${String.format("%02d", dayOfMonth)}일"
@@ -196,6 +198,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 우마무스메 검색 이벤트 처리
     private fun searchStudentByName(query: String) {
         if (query.isEmpty()) {
             adapter.updateData(emptyList())
