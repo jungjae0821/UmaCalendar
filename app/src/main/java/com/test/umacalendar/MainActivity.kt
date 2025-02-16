@@ -198,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 우마무스메 검색 이벤트 처리
+    // 우마무스메 검색 이벤트 처리 (우마무스메 이름을 입력하면 관련된 정보가 나오는 식으로)
     private fun searchStudentByName(query: String) {
         if (query.isEmpty()) {
             adapter.updateData(emptyList())
