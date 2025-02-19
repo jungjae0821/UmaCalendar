@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="찾고싶은 우마무스메의 이름을 입력하세요."
+        android:hint="우마무스메의 이름을 입력하세요."
         android:inputType="text"
         android:padding="8dp" />
 
