@@ -151,7 +151,8 @@ class MainActivity : AppCompatActivity() {
         Student("그란 알레그리아", "2016-01-24"),
         Student("러브즈 온리 유", "2016-03-26"),
         Student("크로노 제네시스", "2016-03-06"),
-        Student("카렌 부케도르", "2016-04-23")
+        Student("카렌 부케도르", "2016-04-23"),
+        Student("스테이 골드", "1994-03-24")
     )
 
     // RecyclerView 어댑터
